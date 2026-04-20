@@ -7,3 +7,17 @@ dist/
 .DS_Store
 Thumbs.db
 설정정보.txt
+
+# 카카오톡 파일
+KakaoTalk_*.txt
+KakaoTalk_*.png
+
+# 규칙 파일
+firestore_rules*.txt
+storage_rules*.txt
+
+# 스크린샷
+화면\ 캡처\ *.png
+
+# Claude 설정
+.claude/
