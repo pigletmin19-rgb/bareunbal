@@ -26,4 +26,12 @@
 .pointCard { background: #f7f6f2; border-radius: 12px; padding: 32px; text-align: center; }
 .pointLabel { font-size: 13px; color: #a0a09a; margin-bottom: 8px; }
 .pointValue { font-size: 28px; font-weight: 800; }
+.infoForm { display: flex; flex-direction: column; gap: 20px; max-width: 480px; }
+.infoField { display: flex; flex-direction: column; gap: 6px; }
+.infoLabel { font-size: 13px; font-weight: 600; color: #1a1a1a; }
+.infoInput { padding: 12px 16px; border: 1px solid #e8e8e4; border-radius: 8px; font-size: 15px; font-family: inherit; outline: none; }
+.infoInput:focus { border-color: #3d6b4f; }
+.infoInput:disabled { background: #f7f6f2; color: #a0a09a; }
+.saveBtn { padding: 12px 32px; background: #1a1a1a; color: #fff; font-size: 15px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; font-family: inherit; width: fit-content; }
+.saveBtn:hover { background: #333; }
 @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }

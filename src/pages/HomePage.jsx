@@ -27,7 +27,7 @@ export default function HomePage() {
       <section className={styles.hero}>
         <div className={styles.heroMedia}>
           <img
-            src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=1800&q=80"
+            src={settings.heroImage}
             alt="바른발 기능성 슈즈"
             className={styles.heroImg}
           />
@@ -81,7 +81,7 @@ export default function HomePage() {
         <div className={styles.storyCard}>
           <div className={styles.storyImgWrap}>
             <img
-              src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=900&q=80"
+              src={settings.storyImage1}
               alt="편안함"
               className={styles.storyImg}
             />
@@ -99,7 +99,7 @@ export default function HomePage() {
         <div className={`${styles.storyCard} ${styles.storyReverse}`}>
           <div className={styles.storyImgWrap}>
             <img
-              src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=900&q=80"
+              src={settings.storyImage2}
               alt="지속가능성"
               className={styles.storyImg}
             />

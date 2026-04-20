@@ -25,10 +25,12 @@ import AdminCoupons from './pages/admin/AdminCoupons'
 import AdminReviews from './pages/admin/AdminReviews'
 import AdminSettings from './pages/admin/AdminSettings'
 import { CartProvider } from './contexts/CartContext'
+import { AuthProvider } from './contexts/AuthContext'
 import ScrollToTop from './components/ScrollToTop'
 
 export default function App() {
   return (
+    <AuthProvider>
     <CartProvider>
       <Routes>
         {/* 관리자 라우트 */}
@@ -73,5 +75,6 @@ export default function App() {
         } />
       </Routes>
     </CartProvider>
+    </AuthProvider>
   )
 }

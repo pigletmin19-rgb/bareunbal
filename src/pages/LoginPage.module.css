@@ -115,3 +115,40 @@
 }
 
 .agree a { color: #3d6b4f; font-weight: 600; }
+
+.googleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  background: #fff;
+  border: 1px solid #e8e8e4;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.googleBtn:hover { background: #f7f6f2; }
+
+.error {
+  color: #e53e3e;
+  font-size: 13px;
+  text-align: center;
+}
+
+.forgotBtn {
+  background: none;
+  border: none;
+  color: #3d6b4f;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  padding: 0;
+}

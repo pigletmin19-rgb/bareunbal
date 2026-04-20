@@ -42,6 +42,22 @@ export default function AdminSettings() {
     update('materials', updated)
   }
 
+  const handleHeroImg = e => {
+    const file = e.target.files[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = ev => update('heroImage', ev.target.result)
+    reader.readAsDataURL(file)
+  }
+
+  const handleStoryImg = (key, e) => {
+    const file = e.target.files[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = ev => update(key, ev.target.result)
+    reader.readAsDataURL(file)
+  }
+
   const handleMaterialImg = (i, e) => {
     const file = e.target.files[0]
     if (!file) return
@@ -100,6 +116,54 @@ export default function AdminSettings() {
             <label className={styles.label}>홈 히어로 부제목</label>
             <p className={styles.hint}>메인 큰 제목 아래 작은 문구입니다. (예: 최대 50% 세일 진행 중)</p>
             <input className={styles.input} value={settings.heroSub} onChange={e => update('heroSub', e.target.value)} />
+          </div>
+
+          <div className={styles.fieldGroup}>
+            <label className={styles.label}>홈 메인 이미지 (히어로)</label>
+            <p className={styles.hint}>메인 화면 풀스크린 배경 이미지입니다.</p>
+            <div className={styles.materialRow}>
+              <div className={styles.materialImgWrap}>
+                {settings.heroImage && <img src={settings.heroImage} alt="히어로" className={styles.materialImg} />}
+                <label className={styles.fileLabel}>
+                  📷 사진 변경
+                  <input type="file" accept="image/*" onChange={handleHeroImg} className={styles.fileInput} />
+                </label>
+                <p className={styles.hint}>또는 URL 직접 입력</p>
+                <input className={styles.input} value={settings.heroImage?.startsWith('data:') ? '' : settings.heroImage || ''} onChange={e => update('heroImage', e.target.value)} placeholder="이미지 URL" />
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.fieldGroup}>
+            <label className={styles.label}>스토리 이미지 1 (편안함)</label>
+            <p className={styles.hint}>홈 중간 "하루 종일 편안함" 섹션 이미지입니다.</p>
+            <div className={styles.materialRow}>
+              <div className={styles.materialImgWrap}>
+                {settings.storyImage1 && <img src={settings.storyImage1} alt="스토리1" className={styles.materialImg} />}
+                <label className={styles.fileLabel}>
+                  📷 사진 변경
+                  <input type="file" accept="image/*" onChange={e => handleStoryImg('storyImage1', e)} className={styles.fileInput} />
+                </label>
+                <p className={styles.hint}>또는 URL 직접 입력</p>
+                <input className={styles.input} value={settings.storyImage1?.startsWith('data:') ? '' : settings.storyImage1 || ''} onChange={e => update('storyImage1', e.target.value)} placeholder="이미지 URL" />
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.fieldGroup}>
+            <label className={styles.label}>스토리 이미지 2 (지속가능성)</label>
+            <p className={styles.hint}>홈 중간 "지구를 위한 선택" 섹션 이미지입니다.</p>
+            <div className={styles.materialRow}>
+              <div className={styles.materialImgWrap}>
+                {settings.storyImage2 && <img src={settings.storyImage2} alt="스토리2" className={styles.materialImg} />}
+                <label className={styles.fileLabel}>
+                  📷 사진 변경
+                  <input type="file" accept="image/*" onChange={e => handleStoryImg('storyImage2', e)} className={styles.fileInput} />
+                </label>
+                <p className={styles.hint}>또는 URL 직접 입력</p>
+                <input className={styles.input} value={settings.storyImage2?.startsWith('data:') ? '' : settings.storyImage2 || ''} onChange={e => update('storyImage2', e.target.value)} placeholder="이미지 URL" />
+              </div>
+            </div>
           </div>
         </div>
       )}

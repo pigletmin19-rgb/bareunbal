@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
-import { PRODUCTS } from '../data/products'
+import { getAllProducts } from '../services/productService'
 import { getSettings } from '../data/siteSettings'
 import styles from './ProductsPage.module.css'
 
@@ -32,7 +32,13 @@ export default function ProductsPage({ category }) {
 
   const [gender, setGender] = useState(initGender || 'women')
   const [sort, setSort] = useState('default')
+  const [allProducts, setAllProducts] = useState([])
+  const [loading, setLoading] = useState(true)
   const { shoeTypes: SHOE_TYPES, shoeModels: SHOE_MODELS } = getSettings()
+
+  useEffect(() => {
+    getAllProducts().then(data => { setAllProducts(data); setLoading(false) })
+  }, [])
   const [selectedTypes, setSelectedTypes] = useState([])
   const [selectedSizes, setSelectedSizes] = useState([])
   const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -49,14 +55,14 @@ export default function ProductsPage({ category }) {
   const isSale = category === 'sale'
   const isNew = tag === 'new'
 
-  let filtered = PRODUCTS
+  let filtered = allProducts
 
   if (isSale) {
-    filtered = PRODUCTS.filter(p => p.tags.includes('sale'))
+    filtered = allProducts.filter(p => p.tags.includes('sale'))
   } else if (isNew) {
-    filtered = PRODUCTS.filter(p => p.tags.includes('new'))
+    filtered = allProducts.filter(p => p.tags.includes('new'))
   } else {
-    filtered = PRODUCTS.filter(p => p.category === gender)
+    filtered = allProducts.filter(p => p.category === gender)
   }
 
   if (selectedSizes.length > 0) {
@@ -99,6 +105,8 @@ export default function ProductsPage({ category }) {
   const paged = sorted.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
 
   const pageTitle = isSale ? '세일' : isNew ? '신제품' : ''
+
+  if (loading) return <div style={{ textAlign: 'center', padding: '80px' }}>불러오는 중...</div>
 
   return (
     <div className={styles.page}>

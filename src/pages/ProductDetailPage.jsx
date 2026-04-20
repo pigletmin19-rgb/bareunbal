@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { getProductById } from '../data/products'
+import { getProductById } from '../services/productService'
 import { useCart } from '../contexts/CartContext'
 import styles from './ProductDetailPage.module.css'
 
@@ -16,13 +16,20 @@ export default function ProductDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { addItem } = useCart()
-  const product = getProductById(id)
+  const [product, setProduct] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    getProductById(id).then(data => { setProduct(data); setLoading(false) })
+  }, [id])
 
   const [selectedColor, setSelectedColor] = useState(0)
   const [selectedSize, setSelectedSize] = useState(null)
   const [activeImg, setActiveImg] = useState(0)
   const [activeTab, setActiveTab] = useState(0)
   const [added, setAdded] = useState(false)
+
+  if (loading) return <div style={{ textAlign: 'center', padding: '80px' }}>불러오는 중...</div>
 
   if (!product) {
     return (

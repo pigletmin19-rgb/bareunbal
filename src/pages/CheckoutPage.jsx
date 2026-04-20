@@ -1,24 +1,59 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '../firebase'
+import { useAuth } from '../contexts/AuthContext'
 import { useCart } from '../contexts/CartContext'
 import styles from './CheckoutPage.module.css'
 
+const REQUESTS = [
+  '선택 안 함',
+  '문 앞에 놓아주세요',
+  '경비실에 맡겨주세요',
+  '택배함에 넣어주세요',
+  '연락 후 배송해주세요',
+  '부재 시 문자 남겨주세요',
+  '직접 입력',
+]
+
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCart()
+  const { user } = useAuth()
   const navigate = useNavigate()
   const shippingFee = totalPrice >= 50000 ? 0 : 3000
   const finalPrice = totalPrice + shippingFee
 
-  const [form, setForm] = useState({
-    name: '', phone: '', zipCode: '', address: '', detail: '',
-    request: '', sameAsBuyer: false,
-  })
+  const [buyer, setBuyer] = useState({ name: '', phone: '', email: '' })
+  const [shipping, setShipping] = useState({ name: '', phone: '', zipCode: '', address: '', detail: '', request: '선택 안 함', requestDirect: '' })
+  const [sameAsBuyer, setSameAsBuyer] = useState(false)
+  const [payMethod, setPayMethod] = useState('card')
+  const [agree, setAgree] = useState(false)
 
-  const handleChange = e => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  useEffect(() => {
+    if (!user) return
+    getDoc(doc(db, 'users', user.uid)).then(snap => {
+      if (snap.exists()) {
+        const data = snap.data()
+        setBuyer({ name: data.name || '', phone: data.phone || '', email: user.email || '' })
+      } else {
+        setBuyer(prev => ({ ...prev, email: user.email || '' }))
+      }
+    })
+  }, [user])
+
+  useEffect(() => {
+    if (sameAsBuyer) {
+      setShipping(prev => ({ ...prev, name: buyer.name, phone: buyer.phone }))
+    }
+  }, [sameAsBuyer, buyer])
+
+  const handleBuyerChange = e => setBuyer(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  const handleShippingChange = e => setShipping(prev => ({ ...prev, [e.target.name]: e.target.value }))
 
   const handleSubmit = e => {
     e.preventDefault()
-    alert('결제 기능은 토스페이먼츠 연동 후 활성화됩니다.\n\n주문 완료 처리됩니다.')
+    if (!agree) { alert('이용약관에 동의해주세요.'); return }
+    alert('결제 기능은 토스페이먼츠 연동 후 활성화됩니다.')
     clearCart()
     navigate('/')
   }
@@ -39,70 +74,123 @@ export default function CheckoutPage() {
 
         <form onSubmit={handleSubmit} className={styles.layout}>
           <div className={styles.formArea}>
+
+            {/* 주문자 정보 */}
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>주문자 정보</h2>
+              <div className={styles.fieldRow}>
+                <div className={styles.field}>
+                  <label className={styles.label}>이름 *</label>
+                  <input name="name" value={buyer.name} onChange={handleBuyerChange} className={styles.input} required placeholder="이름 입력" />
+                </div>
+                <div className={styles.field}>
+                  <label className={styles.label}>연락처 *</label>
+                  <input name="phone" value={buyer.phone} onChange={handleBuyerChange} className={styles.input} required placeholder="010-0000-0000" />
+                </div>
+              </div>
+              <div className={styles.field}>
+                <label className={styles.label}>이메일 *</label>
+                <input name="email" type="email" value={buyer.email} onChange={handleBuyerChange} className={styles.input} required placeholder="이메일 주소" />
+              </div>
+            </div>
+
             {/* 배송 정보 */}
             <div className={styles.section}>
-              <h2 className={styles.sectionTitle}>배송 정보</h2>
+              <div className={styles.sectionTitleRow}>
+                <h2 className={styles.sectionTitle}>배송 정보</h2>
+                <label className={styles.checkRow}>
+                  <input
+                    type="checkbox"
+                    checked={sameAsBuyer}
+                    onChange={e => setSameAsBuyer(e.target.checked)}
+                    className={styles.checkbox}
+                  />
+                  <span>주문자 정보와 동일</span>
+                </label>
+              </div>
 
               <div className={styles.fieldRow}>
                 <div className={styles.field}>
                   <label className={styles.label}>수령인 *</label>
-                  <input name="name" value={form.name} onChange={handleChange} className={styles.input} required placeholder="이름 입력" />
+                  <input name="name" value={shipping.name} onChange={handleShippingChange} className={styles.input} required placeholder="이름 입력" />
                 </div>
                 <div className={styles.field}>
                   <label className={styles.label}>연락처 *</label>
-                  <input name="phone" value={form.phone} onChange={handleChange} className={styles.input} required placeholder="010-0000-0000" />
+                  <input name="phone" value={shipping.phone} onChange={handleShippingChange} className={styles.input} required placeholder="010-0000-0000" />
                 </div>
               </div>
 
               <div className={styles.field}>
                 <label className={styles.label}>우편번호 *</label>
                 <div className={styles.zipRow}>
-                  <input name="zipCode" value={form.zipCode} onChange={handleChange} className={styles.input} required placeholder="우편번호" />
-                  <button type="button" className={styles.searchAddrBtn}>주소 검색</button>
+                  <input name="zipCode" value={shipping.zipCode} onChange={handleShippingChange} className={`${styles.input} ${styles.zipInput}`} required placeholder="우편번호" readOnly />
+                  <button type="button" className={styles.searchAddrBtn} onClick={() => {
+                    new window.daum.Postcode({
+                      oncomplete: data => {
+                        setShipping(prev => ({
+                          ...prev,
+                          zipCode: data.zonecode,
+                          address: data.roadAddress || data.jibunAddress,
+                        }))
+                      }
+                    }).open()
+                  }}>주소 검색</button>
                 </div>
               </div>
-
               <div className={styles.field}>
-                <label className={styles.label}>주소 *</label>
-                <input name="address" value={form.address} onChange={handleChange} className={styles.input} required placeholder="기본 주소" />
+                <input name="address" value={shipping.address} onChange={handleShippingChange} className={styles.input} required placeholder="기본 주소" readOnly />
               </div>
-
               <div className={styles.field}>
-                <label className={styles.label}>상세 주소</label>
-                <input name="detail" value={form.detail} onChange={handleChange} className={styles.input} placeholder="상세 주소 (동/호수 등)" />
+                <input name="detail" value={shipping.detail} onChange={handleShippingChange} className={styles.input} placeholder="상세 주소 (동/호수 등)" />
               </div>
 
               <div className={styles.field}>
                 <label className={styles.label}>배송 요청사항</label>
-                <select name="request" value={form.request} onChange={handleChange} className={styles.select}>
-                  <option value="">선택해주세요</option>
-                  <option>문 앞에 놓아주세요</option>
-                  <option>경비실에 맡겨주세요</option>
-                  <option>연락 후 배송해주세요</option>
-                  <option>부재 시 연락바랍니다</option>
+                <select name="request" value={shipping.request} onChange={handleShippingChange} className={styles.select}>
+                  {REQUESTS.map(r => <option key={r}>{r}</option>)}
                 </select>
+                {shipping.request === '직접 입력' && (
+                  <input name="requestDirect" value={shipping.requestDirect} onChange={handleShippingChange} className={styles.input} placeholder="요청사항 직접 입력" style={{ marginTop: 8 }} />
+                )}
               </div>
             </div>
 
             {/* 결제 방법 */}
             <div className={styles.section}>
               <h2 className={styles.sectionTitle}>결제 방법</h2>
-              <div className={styles.paymentNote}>
-                <p>🔒 토스페이먼츠 보안 결제 (카드, 간편결제)</p>
-                <p className={styles.paymentSub}>결제 시 암호화된 보안 채널을 통해 안전하게 처리됩니다.</p>
-              </div>
               <div className={styles.paymentMethods}>
-                {['신용/체크카드', '카카오페이', '네이버페이', '토스페이'].map(m => (
-                  <div key={m} className={styles.payMethod}>{m}</div>
+                {[
+                  { key: 'card', label: '신용/체크카드' },
+                  { key: 'kakao', label: '카카오페이' },
+                  { key: 'naver', label: '네이버페이' },
+                  { key: 'toss', label: '토스페이' },
+                ].map(m => (
+                  <button
+                    key={m.key}
+                    type="button"
+                    className={`${styles.payMethod} ${payMethod === m.key ? styles.payMethodActive : ''}`}
+                    onClick={() => setPayMethod(m.key)}
+                  >
+                    {m.label}
+                  </button>
                 ))}
               </div>
+              <p className={styles.paymentNote}>🔒 토스페이먼츠 보안 결제로 안전하게 처리됩니다.</p>
+            </div>
+
+            {/* 약관 동의 */}
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>약관 동의</h2>
+              <label className={styles.checkRow}>
+                <input type="checkbox" checked={agree} onChange={e => setAgree(e.target.checked)} className={styles.checkbox} />
+                <span>[필수] <Link to="/terms" target="_blank">이용약관</Link> 및 <Link to="/privacy" target="_blank">개인정보처리방침</Link>에 동의합니다.</span>
+              </label>
             </div>
           </div>
 
           {/* 주문 요약 */}
           <div className={styles.summary}>
             <h3 className={styles.summaryTitle}>주문 상품</h3>
-
             <div className={styles.orderItems}>
               {items.map(item => (
                 <div key={item.key} className={styles.orderItem}>
@@ -136,9 +224,8 @@ export default function CheckoutPage() {
             <button type="submit" className={styles.payBtn}>
               {finalPrice.toLocaleString()}원 결제하기
             </button>
-
-            <p className={styles.agree}>
-              주문하면 <Link to="/terms">이용약관</Link>에 동의하는 것으로 간주됩니다.
+            <p className={styles.freeShipNote}>
+              {shippingFee > 0 ? `${(50000 - totalPrice).toLocaleString()}원 더 담으면 무료배송!` : '✓ 무료배송 적용'}
             </p>
           </div>
         </form>

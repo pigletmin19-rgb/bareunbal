@@ -277,6 +277,27 @@
   border-top: 2px solid #f0f0ec;
 }
 
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoutBtn {
+  background: none;
+  border: none;
+  font-size: 12px;
+  color: #a0a09a;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.logoutBtn:hover { color: #1a1a1a; }
+
+.iconBtnActive { color: #3d6b4f; }
+
 /* 반응형 */
 @media (max-width: 900px) {
   .navLeft { display: none; }

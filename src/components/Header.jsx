@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase'
 import { useCart } from '../contexts/CartContext'
+import { useAuth } from '../contexts/AuthContext'
 import { getSettings } from '../data/siteSettings'
 import styles from './Header.module.css'
 
@@ -50,8 +53,15 @@ export default function Header() {
   const [hoveredNav, setHoveredNav] = useState(null)
   const [scrolled, setScrolled] = useState(false)
   const { totalCount } = useCart()
+  const { user } = useAuth()
   const location = useLocation()
+  const navigate = useNavigate()
   const leaveTimer = useRef(null)
+
+  const handleLogout = async () => {
+    await signOut(auth)
+    navigate('/')
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4)
@@ -120,12 +130,24 @@ export default function Header() {
 
           {/* 오른쪽 아이콘 */}
           <div className={styles.navRight}>
-            <Link to="/login" className={styles.iconBtn} aria-label="로그인">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </Link>
+            {user ? (
+              <div className={styles.userMenu}>
+                <Link to="/mypage" className={`${styles.iconBtn} ${styles.iconBtnActive}`} aria-label="마이페이지" title="마이페이지">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </Link>
+                <button className={styles.logoutBtn} onClick={handleLogout}>로그아웃</button>
+              </div>
+            ) : (
+              <Link to="/login" className={styles.iconBtn} aria-label="로그인" title="로그인">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </Link>
+            )}
             <Link to="/cart" className={styles.cartBtn} aria-label="장바구니">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
@@ -190,8 +212,14 @@ export default function Header() {
               </Link>
             ))}
             <div className={styles.mobileDivider} />
-            <Link to="/login" className={styles.mobileLink} onClick={toggleMenu}>로그인 / 회원가입</Link>
-            <Link to="/mypage" className={styles.mobileLink} onClick={toggleMenu}>마이페이지</Link>
+            {user ? (
+              <>
+                <Link to="/mypage" className={styles.mobileLink} onClick={toggleMenu}>마이페이지</Link>
+                <button className={styles.mobileLink} onClick={() => { handleLogout(); toggleMenu() }} style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer', fontFamily: 'inherit' }}>로그아웃</button>
+              </>
+            ) : (
+              <Link to="/login" className={styles.mobileLink} onClick={toggleMenu}>로그인 / 회원가입</Link>
+            )}
           </div>
         </div>
       )}

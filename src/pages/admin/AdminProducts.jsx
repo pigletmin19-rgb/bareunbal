@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { PRODUCTS } from '../../data/products'
+import { getAllProducts, createProduct, updateProduct, deleteProduct } from '../../services/productService'
 import styles from './AdminProducts.module.css'
 
 const INIT_FORM = {
@@ -8,8 +9,23 @@ const INIT_FORM = {
 }
 
 export default function AdminProducts() {
-  const [products, setProducts] = useState(PRODUCTS)
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
+
+  useEffect(() => {
+    getAllProducts().then(data => { setProducts(data); setLoading(false) })
+  }, [])
+
+  const handleSeedFirestore = async () => {
+    if (!window.confirm('기존 상품 데이터를 Firestore에 업로드하시겠습니까?')) return
+    for (const p of PRODUCTS) {
+      await createProduct(p)
+    }
+    const data = await getAllProducts()
+    setProducts(data)
+    alert('업로드 완료!')
+  }
   const [form, setForm] = useState(INIT_FORM)
   const [editId, setEditId] = useState(null)
   const [search, setSearch] = useState('')
@@ -66,13 +82,14 @@ export default function AdminProducts() {
     setShowForm(true)
   }
 
-  const handleDelete = id => {
+  const handleDelete = async id => {
     if (window.confirm('상품을 삭제하시겠습니까?')) {
+      await deleteProduct(id)
       setProducts(prev => prev.filter(p => p.id !== id))
     }
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
     const newProduct = {
       id: editId || `p${Date.now()}`,
@@ -96,8 +113,11 @@ export default function AdminProducts() {
     }
 
     if (editId) {
+      const { id, ...data } = newProduct
+      await updateProduct(id, data)
       setProducts(prev => prev.map(p => p.id === editId ? newProduct : p))
     } else {
+      await createProduct(newProduct)
       setProducts(prev => [...prev, newProduct])
     }
 
@@ -106,13 +126,22 @@ export default function AdminProducts() {
     setShowForm(false)
   }
 
+  if (loading) return <div style={{ textAlign: 'center', padding: '80px' }}>불러오는 중...</div>
+
   return (
     <div className={styles.page}>
       <div className={styles.pageHead}>
         <h1 className={styles.pageTitle}>상품 관리</h1>
-        <button className={styles.addBtn} onClick={() => { setShowForm(true); setEditId(null); setForm(INIT_FORM); setColors([]) }}>
-          + 상품 등록
-        </button>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          {products.length === 0 && (
+            <button className={styles.editBtn} onClick={handleSeedFirestore}>
+              초기 데이터 업로드
+            </button>
+          )}
+          <button className={styles.addBtn} onClick={() => { setShowForm(true); setEditId(null); setForm(INIT_FORM); setColors([]) }}>
+            + 상품 등록
+          </button>
+        </div>
       </div>
 
       {/* 검색 */}

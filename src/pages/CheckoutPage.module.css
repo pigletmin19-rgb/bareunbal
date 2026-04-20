@@ -15,8 +15,16 @@
 .paymentNote { background: #f7f6f2; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
 .paymentNote p { font-size: 14px; font-weight: 600; }
 .paymentSub { font-size: 12px; color: #a0a09a; font-weight: 400; margin-top: 4px; }
-.paymentMethods { display: flex; gap: 10px; flex-wrap: wrap; }
-.payMethod { padding: 8px 16px; border: 1px solid #e8e8e4; border-radius: 6px; font-size: 13px; font-weight: 500; }
+.sectionTitleRow { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.sectionTitleRow .sectionTitle { margin-bottom: 0; }
+.checkRow { display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; }
+.checkRow a { color: #3d6b4f; }
+.checkbox { width: 16px; height: 16px; accent-color: #3d6b4f; cursor: pointer; }
+.zipInput { flex: 1; }
+.paymentMethods { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.payMethod { padding: 10px 18px; border: 1px solid #e8e8e4; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; background: #fff; font-family: inherit; transition: all 0.15s; }
+.payMethodActive { border-color: #1a1a1a; background: #1a1a1a; color: #fff; }
+.freeShipNote { font-size: 12px; color: #3d6b4f; text-align: center; font-weight: 600; }
 .summary { position: sticky; top: 80px; background: #f7f6f2; border-radius: 12px; padding: 28px; }
 .summaryTitle { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
 .orderItems { display: flex; flex-direction: column; gap: 16px; margin-bottom: 20px; }

@@ -9,6 +9,9 @@ const DEFAULTS = {
   heroTitle: '척추 건강을 위한\n기능성 슈즈',
   heroBadge: '신제품 출시',
   heroSub: '최대 50% 세일 진행 중',
+  heroImage: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=1800&q=80',
+  storyImage1: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=900&q=80',
+  storyImage2: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=900&q=80',
 
   // 브랜드 정보
   brandName: '바른발',
