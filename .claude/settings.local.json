@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:5174)",
+      "WebFetch(domain:allbirds.co.kr)",
+      "Bash(netstat -ano)",
+      "Bash(wmic process *)",
+      "mcp__filesystem__write_file",
+      "Bash(gh auth *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

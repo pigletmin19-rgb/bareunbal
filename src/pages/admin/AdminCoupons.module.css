@@ -1,0 +1,44 @@
+.page {}
+.pageHead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.pageTitle { font-size: 24px; font-weight: 700; }
+.addBtn { padding: 10px 20px; background: #1a1a1a; color: #fff; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer; border: none; font-family: inherit; }
+
+.tableWrap { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table th { padding: 12px 16px; background: #f7f6f2; text-align: left; font-size: 12px; font-weight: 600; color: #666660; }
+.table td { padding: 14px 16px; border-bottom: 1px solid #f0f0ec; vertical-align: middle; }
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: #fafafa; }
+
+.codeCell { font-weight: 700; font-size: 15px; letter-spacing: 0.5px; color: #1a1a1a; }
+.discountCell { font-weight: 600; color: #3d6b4f; }
+.dateCell { font-size: 13px; color: #a0a09a; }
+
+.usageBar { display: flex; flex-direction: column; gap: 4px; }
+.usageText { font-size: 12px; color: #666660; }
+.progressBar { height: 4px; background: #f0f0ec; border-radius: 2px; width: 80px; }
+.progressFill { height: 100%; background: #3d6b4f; border-radius: 2px; }
+
+.statusBadge { display: inline-block; padding: 3px 10px; border-radius: 50px; font-size: 12px; font-weight: 600; }
+.active { background: #edf4ef; color: #3d6b4f; }
+.inactive { background: #f0f0ec; color: #a0a09a; }
+
+.actions { display: flex; gap: 8px; }
+.toggleBtn { padding: 5px 12px; background: #f0f0ec; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; }
+.deleteBtn { padding: 5px 12px; background: #fde8e8; color: #c0392b; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; }
+
+/* 모달 */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.modal { background: #fff; border-radius: 16px; width: 100%; max-width: 480px; }
+.modalHead { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; border-bottom: 1px solid #f0f0ec; }
+.modalTitle { font-size: 18px; font-weight: 700; }
+.closeBtn { font-size: 18px; color: #a0a09a; cursor: pointer; }
+.form { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.formRow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.label { font-size: 13px; font-weight: 600; color: #333; }
+.input, .select { padding: 10px 14px; border: 1px solid #e8e8e4; border-radius: 8px; font-size: 14px; font-family: inherit; outline: none; }
+.input:focus, .select:focus { border-color: #3d6b4f; }
+.formActions { display: flex; justify-content: flex-end; gap: 12px; padding-top: 8px; }
+.cancelBtn { padding: 10px 20px; background: #f0f0ec; color: #1a1a1a; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer; border: none; font-family: inherit; }
+.saveBtn { padding: 10px 24px; background: #1a1a1a; color: #fff; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer; border: none; font-family: inherit; }

@@ -1,0 +1,8 @@
+.page { padding: 60px 0 96px; min-height: 60vh; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.title { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+.updated { font-size: 13px; color: #a0a09a; margin-bottom: 48px; }
+.content h2 { font-size: 18px; font-weight: 700; margin: 32px 0 12px; }
+.content p { font-size: 15px; color: #333330; line-height: 1.8; margin-bottom: 8px; }
+.content ul { padding-left: 20px; margin-bottom: 16px; }
+.content ul li { font-size: 15px; color: #333330; line-height: 2; }

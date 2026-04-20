@@ -1,0 +1,141 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f5f7;
+}
+
+.sidebar {
+  width: 240px;
+  background: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  transition: transform 0.2s;
+}
+
+.collapsed {
+  transform: translateX(-240px);
+}
+
+.sidebarHead {
+  padding: 24px 20px;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.adminBadge {
+  font-size: 11px;
+  font-weight: 700;
+  background: #3d6b4f;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 50px;
+}
+
+.nav {
+  flex: 1;
+  padding: 16px 0;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  color: #a0a09a;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+}
+
+.navItem:hover {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.navActive {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.navIcon {
+  font-size: 18px;
+}
+
+.navLabel {}
+
+.sidebarBottom {
+  padding: 20px;
+  border-top: 1px solid #333;
+}
+
+.shopLink {
+  font-size: 13px;
+  color: #a0a09a;
+}
+
+.shopLink:hover { color: #fff; }
+
+/* 메인 */
+.main {
+  flex: 1;
+  margin-left: 240px;
+  transition: margin-left 0.2s;
+  min-height: 100vh;
+}
+
+.topBar {
+  background: #fff;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 16px;
+  border-bottom: 1px solid #e8e8e4;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.menuToggle {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  color: #666;
+}
+
+.topBarTitle {
+  font-size: 16px;
+  font-weight: 700;
+  flex: 1;
+}
+
+.adminName {
+  font-size: 13px;
+  color: #666660;
+}
+
+.content {
+  padding: 32px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-240px);
+  }
+  .main {
+    margin-left: 0;
+  }
+}

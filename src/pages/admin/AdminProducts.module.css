@@ -1,0 +1,368 @@
+.page {}
+
+.pageHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.pageTitle {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.addBtn {
+  padding: 10px 20px;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.addBtn:hover { background: #333; }
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.searchInput {
+  padding: 10px 16px;
+  border: 1px solid #e8e8e4;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  width: 280px;
+  outline: none;
+}
+
+.count {
+  font-size: 13px;
+  color: #a0a09a;
+}
+
+.tableWrap {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th {
+  padding: 12px 16px;
+  background: #f7f6f2;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666660;
+}
+
+.table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0ec;
+  vertical-align: middle;
+}
+
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: #fafafa; }
+
+.thumbImg {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #f7f6f2;
+}
+
+.productName { font-weight: 600; margin-bottom: 2px; }
+.productNameEn { font-size: 12px; color: #a0a09a; }
+
+.catBadge {
+  display: inline-block;
+  padding: 3px 10px;
+  background: #f0f0ec;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.priceText { font-weight: 700; }
+.originalText { font-size: 12px; color: #a0a09a; text-decoration: line-through; }
+
+.tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #edf4ef;
+  color: #3d6b4f;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.actions { display: flex; gap: 8px; }
+
+.editBtn {
+  padding: 6px 14px;
+  background: #f0f0ec;
+  color: #1a1a1a;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.deleteBtn {
+  padding: 6px 14px;
+  background: #fde8e8;
+  color: #c0392b;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+/* 모달 */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modalHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+  border-bottom: 1px solid #f0f0ec;
+}
+
+.modalTitle { font-size: 18px; font-weight: 700; }
+
+.closeBtn {
+  font-size: 18px;
+  color: #a0a09a;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.form {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.input, .select, .textarea {
+  padding: 10px 14px;
+  border: 1px solid #e8e8e4;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.input:focus, .select:focus, .textarea:focus {
+  border-color: #3d6b4f;
+}
+
+.textarea { resize: vertical; }
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.cancelBtn {
+  padding: 10px 20px;
+  background: #f0f0ec;
+  color: #1a1a1a;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.saveBtn {
+  padding: 10px 24px;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.colorList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+  min-height: 32px;
+}
+
+.colorTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: #f7f6f2;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.colorDot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.15);
+  flex-shrink: 0;
+}
+
+.colorRemove {
+  font-size: 11px;
+  color: #a0a09a;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.colorRemove:hover { color: #c0392b; }
+
+.colorAddRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.colorPicker {
+  width: 40px;
+  height: 38px;
+  border: 1px solid #e8e8e4;
+  border-radius: 8px;
+  padding: 2px;
+  cursor: pointer;
+  background: none;
+}
+
+.colorAddBtn {
+  padding: 10px 16px;
+  background: #f7f6f2;
+  border: 1px solid #e8e8e4;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.colorAddBtn:hover { background: #eeeee8; }
+
+.hint {
+  font-size: 12px;
+  color: #a0a09a;
+  margin-top: 4px;
+}
+
+.stockOk { color: #3d6b4f; font-weight: 600; font-size: 13px; }
+.stockLow { color: #e8734a; font-weight: 700; font-size: 13px; }
+.stockNone { color: #ccc; font-size: 13px; }
+
+.imageUploadWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.imagePreview {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e8e8e4;
+}
+
+.fileLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: #f7f6f2;
+  border: 1px dashed #c8c8c0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.fileLabel:hover { background: #eeeee8; }
+
+.fileInput { display: none; }
+
+.orText {
+  font-size: 12px;
+  color: #a0a09a;
+  text-align: center;
+}

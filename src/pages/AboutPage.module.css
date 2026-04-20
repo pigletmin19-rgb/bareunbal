@@ -1,0 +1,33 @@
+.page {}
+.hero { position: relative; height: 60vh; min-height: 400px; display: flex; align-items: flex-end; overflow: hidden; }
+.heroImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.heroOverlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 60%); }
+.heroContent { position: relative; max-width: 1280px; margin: 0 auto; padding: 60px 24px; width: 100%; }
+.heroLabel { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+.heroTitle { font-size: 40px; font-weight: 800; color: #fff; line-height: 1.2; word-break: keep-all; }
+.section { padding: 96px 0; }
+.bgGray { background: #f7f6f2; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.sectionHead { text-align: center; margin-bottom: 56px; }
+.sectionLabel { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: #3d6b4f; text-transform: uppercase; margin-bottom: 12px; }
+.sectionTitle { font-size: 36px; font-weight: 700; color: #1a1a1a; letter-spacing: -1px; }
+.brandIntro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.desc { font-size: 16px; color: #666660; line-height: 1.8; margin-bottom: 16px; word-break: keep-all; }
+.brandImgWrap { border-radius: 12px; overflow: hidden; }
+.brandImg { width: 100%; height: 400px; object-fit: cover; }
+.materialGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.materialCard { background: #fff; border-radius: 12px; padding: 32px; }
+.materialName { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+.materialDesc { font-size: 15px; color: #666660; line-height: 1.7; word-break: keep-all; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+.step { text-align: center; }
+.stepNum { display: block; font-size: 48px; font-weight: 800; color: #f0f0ec; margin-bottom: 16px; }
+.stepTitle { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+.stepDesc { font-size: 14px; color: #666660; line-height: 1.7; word-break: keep-all; }
+@media (max-width: 768px) {
+  .heroTitle { font-size: 28px; }
+  .brandIntro { grid-template-columns: 1fr; }
+  .materialGrid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .sectionTitle { font-size: 26px; }
+}

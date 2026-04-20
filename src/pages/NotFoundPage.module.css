@@ -1,0 +1,5 @@
+.page { text-align: center; padding: 120px 24px; min-height: 60vh; }
+.code { font-size: 80px; font-weight: 800; color: #f0f0ec; margin-bottom: 20px; }
+.title { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+.desc { font-size: 16px; color: #a0a09a; margin-bottom: 40px; }
+.homeBtn { display: inline-block; padding: 14px 32px; background: #1a1a1a; color: #fff; font-size: 15px; font-weight: 700; border-radius: 8px; }

@@ -1,0 +1,123 @@
+.footer {
+  background: #1a1a1a;
+  color: #fff;
+  margin-top: auto;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 60px 24px 40px;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid #333;
+}
+
+.brand {}
+
+.logo {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.tagline {
+  font-size: 13px;
+  color: #a0a09a;
+  margin-bottom: 20px;
+}
+
+.info {
+  font-size: 13px;
+  color: #a0a09a;
+  line-height: 1.8;
+}
+
+.email {
+  display: block;
+  font-size: 13px;
+  color: #a0a09a;
+  margin-top: 4px;
+}
+
+.email:hover {
+  color: #fff;
+}
+
+.sns {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.snsLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #333;
+  color: #a0a09a;
+  transition: background 0.15s, color 0.15s;
+}
+
+.snsLink:hover {
+  background: #3d6b4f;
+  color: #fff;
+}
+
+.col {}
+
+.colTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+.link {
+  display: block;
+  font-size: 13px;
+  color: #a0a09a;
+  padding: 4px 0;
+  transition: color 0.15s;
+}
+
+.link:hover {
+  color: #fff;
+}
+
+.bottom {
+  padding-top: 32px;
+}
+
+.biz {
+  font-size: 12px;
+  color: #666660;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.copy {
+  font-size: 12px;
+  color: #666660;
+}
+
+@media (max-width: 768px) {
+  .top {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .brand {
+    grid-column: 1 / -1;
+  }
+}

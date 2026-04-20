@@ -1,0 +1,11 @@
+.page { padding: 60px 0 96px; min-height: 60vh; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.title { font-size: 32px; font-weight: 700; margin-bottom: 40px; }
+.list { border-top: 2px solid #1a1a1a; }
+.item { border-bottom: 1px solid #f0f0ec; }
+.itemBtn { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 0; cursor: pointer; background: none; border: none; font-family: inherit; text-align: left; }
+.itemLeft { display: flex; align-items: center; gap: 10px; }
+.newBadge { display: inline-block; padding: 2px 8px; background: #3d6b4f; color: #fff; font-size: 11px; font-weight: 700; border-radius: 4px; flex-shrink: 0; }
+.itemTitle { font-size: 15px; font-weight: 500; }
+.itemDate { font-size: 13px; color: #a0a09a; flex-shrink: 0; }
+.detail { padding: 20px; background: #f7f6f2; font-size: 14px; color: #666660; line-height: 1.8; border-radius: 8px; margin-bottom: 16px; }
