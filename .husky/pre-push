@@ -1,0 +1,1 @@
+node ../factory/claude-setup/scripts/status_doc_commit_guard.js . || exit 1

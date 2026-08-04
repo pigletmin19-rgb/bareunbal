@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite --port 5174",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky",
+    "test": "echo \"(no test suite yet)\" && exit 0"
   },
   "dependencies": {
     "firebase": "^12.12.0",
@@ -17,6 +19,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
+    "husky": "^9.1.7",
     "vite": "^6.0.0"
   }
 }
