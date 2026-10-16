@@ -1,1 +1,4 @@
 node ../factory/claude-setup/scripts/status_doc_commit_guard.js . || exit 1
+node ../factory/claude-setup/scripts/gate_field_blacklist_check.js . || exit 1
+# 전체 시험은 커밋 때가 아니라 올리기 직전에 한 번만 (2026-10-16, 커밋이 느리고 남의 실패에 막히는 문제)
+npm test

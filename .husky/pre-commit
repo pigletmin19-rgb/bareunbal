@@ -1,2 +1,1 @@
 node scripts/check-staged-secrets.js
-npm test
