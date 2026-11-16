@@ -1,1 +1,5 @@
 node scripts/check-staged-secrets.js
+
+# 코드 파일 크기 점검(2026-11-30부터 차단, 그 전에는 경고만) — factory/claude-setup/scripts/file_size_check.js
+FSC="C:/Users/kjs53/Desktop/factory/claude-setup/scripts/file_size_check.js"
+if [ -f "$FSC" ] && [ "${FILE_SIZE_CHECK:-block}" != "off" ]; then node "$FSC" || exit 1; fi
