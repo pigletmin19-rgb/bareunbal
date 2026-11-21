@@ -22,3 +22,6 @@ storage_rules*.txt
 # Claude 설정
 .claude/
 docs/계정-목록.private.md
+
+.agents/
+.claude/settings.local.json
