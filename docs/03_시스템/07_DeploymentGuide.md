@@ -1,6 +1,6 @@
 # 07_DeploymentGuide.md — 배포 가이드
 
-최종 업데이트: 2026-04-18
+최종 업데이트: 2026-05-19
 
 ---
 
@@ -61,6 +61,38 @@ git push -u origin main
 
 - GitHub에 코드 push → Vercel 자동 재배포
 - 별도 설정 불필요 (Vercel이 자동으로 처리)
+
+---
+
+## 현재 배포 현황 (2026-05-19 기준)
+
+| 항목 | 내용 |
+|------|------|
+| GitHub 저장소 | https://github.com/pigletmin19-rgb/bareunbal (Public) |
+| Vercel 계정 | pigletmin19-rgb |
+| 프로덕션 URL | bareunbal.com / www.bareunbal.com |
+| 네임서버 | ns1.vercel-dns.com / ns2.vercel-dns.com (후이즈) |
+| DNS A 레코드 | 216.198.79.1 (Vercel DNS 관리) |
+
+### 배포 방법 (현재)
+- 고객 컴퓨터(`C:\Users\mhson\bareunbal`)에서 push해야 자동 배포됨
+- Vercel Hobby 플랜 제한: 저장소 소유자 계정 커밋만 배포 허용
+
+```bash
+cd C:\Users\mhson\bareunbal
+git pull
+git commit --allow-empty -m "trigger deploy"
+git push
+```
+
+### 환경변수 (Vercel에 설정 완료)
+- VITE_FIREBASE_API_KEY
+- VITE_FIREBASE_AUTH_DOMAIN
+- VITE_FIREBASE_PROJECT_ID
+- VITE_FIREBASE_STORAGE_BUCKET
+- VITE_FIREBASE_MESSAGING_SENDER_ID
+- VITE_FIREBASE_APP_ID
+- VITE_FIREBASE_MEASUREMENT_ID
 
 ---
 
