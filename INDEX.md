@@ -8,11 +8,11 @@
 ## 최상위 폴더
 | 폴더 | 추적 파일 수 | 주된 종류 | 역할(채워 넣기) |
 |---|---|---|---|
-| `src/` | 58 | jsx 29, css 24, js 5 | |
-| `docs/` | 10 | md 10 | |
-| `.husky/` | 2 | 기타 2 | |
-| `.claude/` | 1 | json 1 | |
-| `scripts/` | 1 | js 1 | |
+| `src/` | 58 | jsx 29, css 24, js 5 | 바른발 쇼핑몰 화면·데이터 소스 |
+| `docs/` | 10 | md 10 | 기획·디자인·시스템·운영 문서 |
+| `.husky/` | 2 | 기타 2 | 커밋·푸시 전 점검 훅 |
+| `.claude/` | 1 | json 1 | 클로드 코드 로컬 설정 |
+| `scripts/` | 1 | js 1 | 커밋 전 비밀 노출 점검 스크립트 |
 
 ## 루트 파일(그림·압축 제외, 최대 30개)
 `.gitignore` · `CLAUDE.md` · `KakaoTalk_Longtxt_20260420_1111_41_436.txt` · `firestore_rules.txt` · `index.html` · `package-lock.json` · `package.json` · `storage_rules.txt` · `vercel.json` · `vite.config.js`
