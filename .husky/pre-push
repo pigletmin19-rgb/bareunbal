@@ -1,4 +1,5 @@
 F="../factory"; [ -d "$F" ] || F="/c/Users/kjs53/Desktop/factory"   # 앱을 C:/projects 로 옮겨도 팩토리 도구를 찾는다(2026-11-14, 팩토리는 바탕화면 유지)
+sh "$F"/claude-setup/git-hooks/pre-push "$@" || exit 1   # 푸시 전 비밀 점검(팩토리 공통, 2026-11-21) — 푸시 정보(stdin)를 먼저 읽는 줄이라 맨 앞에 둔다
 node "$F"/claude-setup/scripts/status_doc_commit_guard.js . || exit 1
 node "$F"/claude-setup/scripts/gate_field_blacklist_check.js . || exit 1
 # 전체 시험은 커밋 때가 아니라 올리기 직전에 한 번만 (2026-10-16, 커밋이 느리고 남의 실패에 막히는 문제)
